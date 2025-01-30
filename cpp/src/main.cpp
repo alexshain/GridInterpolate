@@ -3,28 +3,14 @@
 #include "ClosestNeighborGridInterpolation.h"
 
 int main() {
-    Grid grid1 = Grid{"grid1.raw", 0.2, 49};
-    Grid grid2 = Grid{"grid2.raw", 0.35, 749};
+    std::vector<float> grid_func{1, 1, 1, 1, 1, 1, 1, 1, 1};
+    Grid grid1 = Grid{grid_func, 1, 8};
 
-    std::vector<Grid> grids = {grid1, grid2};
+    std::vector<float> new_grid_func = grid1.downscale(2, new LinearGridInterpolation).getGridFunction();
 
-    ClosestNeighborGridInterpolation closestInterpolation = ClosestNeighborGridInterpolation{};
-    LinearGridInterpolation linearInterpolation = LinearGridInterpolation{};
-    std::vector<IGridInterpolation*> interpolators = {&closestInterpolation, &linearInterpolation};
-
-    for(size_t i = 0; i < interpolators.size(); i++) {
-        for(size_t j = 0; j < grids.size(); j++) {
-            std::string filename = "grid" + std::to_string(j+1) + "_downscale_" + std::to_string(i) + ".raw";
-            grids[j].downscale(2, interpolators[i]).writeGridFunctionInFile(filename);
-        }
+    for(size_t i = 0; i < new_grid_func.size(); ++i) {
+        std::cout << new_grid_func[i] << " ";
     }
-
-    
-    for(size_t i = 0; i < interpolators.size(); i++) {
-        Grid grid = {0.18, 149, grid1, interpolators[i]};
-        std::string filename = "grid1_interpolate_" + std::to_string(i) + ".raw";
-        grid.writeGridFunctionInFile(filename);
-    }    
-
+    std::cout << std::endl;
     return 0;
 }
