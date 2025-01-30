@@ -1,7 +1,7 @@
 #include "ClosestNeighborGridInterpolation.h"
 
-void ClosestNeighborGridInterpolation::interpolate(const vector<float> &old_grid, double old_step, 
-    vector<float> &new_grid, double new_step) {
+void ClosestNeighborGridInterpolation::interpolate(const std::vector<float> &old_grid, double old_step, 
+                                                std::vector<float> &new_grid, double new_step) {
     new_grid[0] = old_grid[0];
     double old_area_size = (old_grid.size()-1) * old_step;
     double lust_value_in_old_grid = old_grid[old_grid.size()-1];

@@ -4,7 +4,5 @@
 
 class ClosestNeighborGridInterpolation: public IGridInterpolation {
     public:
-    void interpolate(const vector<float> &old_grid, double old_step, vector<float> &new_grid, double new_step) override;
-    private:
-    
+    void interpolate(const std::vector<float> &old_grid, double old_step, std::vector<float> &new_grid, double new_step) override;
 };

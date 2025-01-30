@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.29)
 
-project(quasi-one-dimensional LANGUAGES CXX)
+project(GridRescale LANGUAGES CXX)
 
 # Стандарт C++
 set(CMAKE_CXX_STANDARD 20)
