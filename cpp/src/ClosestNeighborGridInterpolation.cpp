@@ -9,12 +9,12 @@ void ClosestNeighborGridInterpolation::interpolate(const Grid &old_grid, Grid &n
         if(i * new_grid.getStep() > old_area_size) {
             new_grid_function[i] = lust_value_in_old_grid;
         }
-        for(size_t j = 1; j <old_grid.getGridFunction().size(); j++) {
+        for(size_t j = 1; j < old_grid.getGridFunction().size(); ++j) {
             double next_node_distance = j * old_grid.getStep() - i * new_grid.getStep();
             double previos_node_distance = abs((j-1) * old_grid.getStep() - i * new_grid.getStep());
             if(abs(next_node_distance) < 1e-9) {
                 new_grid_function[i] = old_grid.getGridFunction()[j];
-            } else if(next_node_distance < previos_node_distance && (j * old_grid.getStep() > i * new_grid.getStep() && (j-1) * old_grid.getStep() < i * new_grid.getStep())) {
+            } else if(next_node_distance <= previos_node_distance && (j * old_grid.getStep() > i * new_grid.getStep() && (j-1) * old_grid.getStep() < i * new_grid.getStep())) {
                 new_grid_function[i] = old_grid.getGridFunction()[j];
             } else if(next_node_distance > previos_node_distance && (j * old_grid.getStep() > i * new_grid.getStep() && (j-1) * old_grid.getStep() < i * new_grid.getStep())){
                 new_grid_function[i] = old_grid.getGridFunction()[j-1];

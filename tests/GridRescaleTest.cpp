@@ -8,8 +8,9 @@ TEST(DownscaleTest, ClosestNeighborGridInterpolation) {
     std::vector<float> grid_func{1, 1, 1, 1, 1, 1, 1, 1, 1};
     Grid grid1 = Grid{grid_func, 1};
 
-    std::vector<float> new_grid_func = grid1.downscale(2, new ClosestNeighborGridInterpolation).getGridFunction();
-    std::vector<float> assert_grid_func{1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1};
+    ClosestNeighborGridInterpolation c = ClosestNeighborGridInterpolation{};
+    std::vector<float> new_grid_func = grid1.downscale(2, &c).getGridFunction();
+    std::vector<float> assert_grid_func{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
     EXPECT_EQ(new_grid_func, assert_grid_func);
 }
@@ -45,7 +46,7 @@ TEST(UpscaleTest, LinearGridInterpolation) {
 }
 
 TEST(InterpolateProlongateTest, LinearGridInterpolation) {
-    std::vector<float> grid_func{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::vector<float> grid_func{1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0};
     Grid grid1 = Grid{grid_func, 1};
 
     std::vector<float> new_grid_func(20);
