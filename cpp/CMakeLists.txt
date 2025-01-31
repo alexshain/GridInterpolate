@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Исполняемый файл с указанием исходных файлов
-add_executable(Interpolate 
+add_executable(Rescale 
 			src/main.cpp
 			src/ClosestNeighborGridInterpolation.cpp
 			src/Grid.cpp
