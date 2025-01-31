@@ -14,7 +14,7 @@ void ClosestNeighborGridInterpolation::interpolate(const vector<float> &old_grid
             double previos_node_distance = abs((j-1)*old_step-i*new_step);
             if(abs(next_node_distance) < 1e-9) {
                 new_grid[i] = old_grid[j];
-            } else if(next_node_distance < previos_node_distance && (j*old_step > i*new_step && (j-1)*old_step < i*new_step)) {
+            } else if(next_node_distance <= previos_node_distance && (j*old_step > i*new_step && (j-1)*old_step < i*new_step)) {
                 new_grid[i] = old_grid[j];
             } else if(next_node_distance > previos_node_distance && (j*old_step > i*new_step && (j-1)*old_step < i*new_step)){
                 new_grid[i] = old_grid[j-1];
