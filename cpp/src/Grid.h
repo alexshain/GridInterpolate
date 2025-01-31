@@ -22,6 +22,8 @@ class Grid {
     std::vector<float> getGridFunction() const;
     double getStep() const;
     size_t getStepsNumber() const;
+
+    void resetGrid(const std::vector<float> &grid_function, double step);
     
     private:
     void readGridFunctionFromFile(std::filesystem::path path);

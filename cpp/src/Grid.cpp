@@ -27,30 +27,31 @@ Grid::Grid(double step, size_t steps_number, Grid old_grid, IGridInterpolation *
     step_(step),
     steps_number_(steps_number),
     grid_function_(steps_number + 1) {
-        grid_interpolation->interpolate(old_grid.getGridFunction(), old_grid.getStep(), grid_function_, step_);
+        grid_interpolation->interpolate(old_grid, *this);
     }
 
 Grid Grid::upscale(size_t k, IGridInterpolation *grid_interpolation) {
     double new_step = step_ * k; 
     size_t new_steps_number = steps_number_ / k;
     std::vector<float> new_grid_function(new_steps_number + 1);
-    grid_interpolation->interpolate(grid_function_, step_, new_grid_function, new_step);
-    return Grid{new_grid_function, new_step};
+    Grid new_grid = Grid{new_grid_function, new_step};
+    grid_interpolation->interpolate(*this, new_grid);
+    return new_grid;
 }
 
 Grid Grid::downscale(size_t k, IGridInterpolation *grid_interpolation) {
     double new_step = step_ / k; 
     size_t new_steps_number = steps_number_ * k;
     std::vector<float> new_grid_function(new_steps_number + 1);
-    grid_interpolation->interpolate(grid_function_, step_, new_grid_function, new_step);
-    return Grid{new_grid_function, new_step};
+    Grid new_grid = Grid{new_grid_function, new_step};
+    grid_interpolation->interpolate(*this, new_grid);
+    return new_grid;
 }
 
 void Grid::writeGridFunctionInFile(std::filesystem::path path) {
     std::ofstream fout(path, std::ios_base::binary);
     fout.write((char*)grid_function_.data(), sizeof(float)*grid_function_.size());
     fout.close();
-    cout << grid_function_.size() << endl;
 }
 
 std::vector<float> Grid::getGridFunction() const {
@@ -63,4 +64,10 @@ double Grid::getStep() const {
 
 size_t Grid::getStepsNumber() const {
     return steps_number_;
+}
+
+void Grid::resetGrid(const std::vector<float> &grid_function, double step) {
+    grid_function_ = grid_function;
+    steps_number_ = grid_function.size() - 1;
+    step_ = step;
 }
