@@ -10,13 +10,13 @@ void LinearGridInterpolation::interpolate(const Grid &old_grid, Grid &new_grid) 
             new_grid_function[i] = lust_value_in_old_grid;
         }
         for(size_t j = 1; j < old_grid.getGridFunction().size(); j++) {
-            double next_node_distance = abs(j * old_grid.getStep() - i * new_grid.getStep());
+            double next_node_distance = j * old_grid.getStep() - i * new_grid.getStep();
             double previos_node_distance = abs((j-1) * old_grid.getStep() - i * new_grid.getStep());
             if(abs(next_node_distance) < 1e-10) {
-                new_grid_function[i] = old_grid.getGridFunction()[j];
+                new_grid_function[i] = static_cast<float>(old_grid.getGridFunction()[j]);
             } else if(j * old_grid.getStep() > i * new_grid.getStep() && (j-1) * old_grid.getStep() < i * new_grid.getStep()) {
-                new_grid_function[i] = ((old_grid.getStep() - previos_node_distance) / old_grid.getStep()) * old_grid.getGridFunction()[j-1] +
-                                    ((old_grid.getStep() - next_node_distance)/old_grid.getStep()) * old_grid.getGridFunction()[j];
+                new_grid_function[i] = static_cast<float>(((old_grid.getStep() - previos_node_distance) / old_grid.getStep()) * old_grid.getGridFunction()[j-1] +
+                                    ((old_grid.getStep() - next_node_distance)/old_grid.getStep()) * old_grid.getGridFunction()[j]);
             }
         }
     }
