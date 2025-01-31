@@ -105,6 +105,12 @@ TEST(InterpolateCutTest, ClosestNeighborGridInterpolation) {
     EXPECT_EQ(new_grid.getGridFunction(), assert_grid_func);
 }
 
+TEST(Ariphmetic, sum) {
+    float a = 5;
+
+    EXPECT_EQ(a / 2, 2.5);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
