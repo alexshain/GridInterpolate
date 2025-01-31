@@ -33,7 +33,7 @@ Grid::Grid(double step, size_t steps_number, Grid old_grid, IGridInterpolation *
 Grid Grid::upscale(size_t k, IGridInterpolation *grid_interpolation) {
     double new_step = step_ * k; 
     size_t new_steps_number = steps_number_ / k;
-    std::vector<float> new_grid_function(new_steps_number + 1);
+    std::vector<float> new_grid_function(new_steps_number + 1, 0);
     Grid new_grid = Grid{new_grid_function, new_step};
     grid_interpolation->interpolate(*this, new_grid);
     return new_grid;
@@ -42,7 +42,7 @@ Grid Grid::upscale(size_t k, IGridInterpolation *grid_interpolation) {
 Grid Grid::downscale(size_t k, IGridInterpolation *grid_interpolation) {
     double new_step = step_ / k; 
     size_t new_steps_number = steps_number_ * k;
-    std::vector<float> new_grid_function(new_steps_number + 1);
+    std::vector<float> new_grid_function(new_steps_number + 1, 0);
     Grid new_grid = Grid{new_grid_function, new_step};
     grid_interpolation->interpolate(*this, new_grid);
     return new_grid;
