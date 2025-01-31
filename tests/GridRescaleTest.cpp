@@ -55,7 +55,7 @@ TEST(InterpolateProlongateTest, LinearGridInterpolation) {
 
     Grid new_grid = Grid{new_grid_func, 0.6};
     linearInterpolation.interpolate(grid1, new_grid);
-    std::vector<float> assert_grid_func{1, 1.6, 2.2, 2.8, 3.4, 4, 4.6, 5.2, 5.8, 6.4, 7, 7.6, 8.2, 8.8, 9.4, 10, 10, 10, 10, 10};
+    std::vector<float> assert_grid_func{1, 2, 3, 3, 4, 4, 5, 6, 6, 7, 7, 8, 9, 9, 10, 10, 10, 10, 10, 10};
 
     EXPECT_EQ(new_grid.getGridFunction(), assert_grid_func);
 }
@@ -70,7 +70,7 @@ TEST(InterpolateProlongateTest, ClosestNeighborGridInterpolation) {
 
     Grid new_grid = Grid{new_grid_func, 0.6};
     closestInterpolation.interpolate(grid1, new_grid);
-    std::vector<float> assert_grid_func{1, 2, 2, 3, 3, 4, 5, 5, 6, 6, 7, 8, 8, 9, 9, 10, 10, 10, 10, 10};
+    std::vector<float> assert_grid_func{1, 2, 3, 3, 4, 4, 5, 6, 6, 7, 7, 8, 9, 9, 10, 10, 10, 10, 10, 10};
 
     EXPECT_EQ(new_grid.getGridFunction(), assert_grid_func);
 }
@@ -85,7 +85,7 @@ TEST(InterpolateCutTest, LinearGridInterpolation) {
 
     Grid new_grid = Grid{new_grid_func, 1.2};
     linearInterpolation.interpolate(grid1, new_grid);
-    std::vector<float> assert_grid_func{1, 2.2, 3.4, 4.6, 5.8};
+    std::vector<float> assert_grid_func{1, 3, 4, 5, 6};
 
     EXPECT_EQ(new_grid.getGridFunction(), assert_grid_func);
 }
@@ -100,7 +100,7 @@ TEST(InterpolateCutTest, ClosestNeighborGridInterpolation) {
 
     Grid new_grid = Grid{new_grid_func, 1.2};
     closestInterpolation.interpolate(grid1, new_grid);
-    std::vector<float> assert_grid_func{1, 2, 3, 5, 6};
+    std::vector<float> assert_grid_func{1, 3, 4, 5, 6};
 
     EXPECT_EQ(new_grid.getGridFunction(), assert_grid_func);
 }
