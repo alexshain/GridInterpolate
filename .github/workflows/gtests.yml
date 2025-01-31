@@ -19,7 +19,15 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y cmake gcc libcunit1 libcunit1-dev
+        sudo apt install -y cmake g++ make
+
+    - name: Install GoogleTest
+      run: |
+        sudo apt-get install -y libgtest-dev
+        cd /usr/src/googletest
+        sudo cmake . 
+        sudo make 
+        sudo make install
 
     - name: Configure CMake
       run: |
@@ -35,4 +43,4 @@ jobs:
     - name: Run tests
       run: |
         cd tests/build
-        ctest --output-on-failure
+        ctest --verbose --output-on-failure
