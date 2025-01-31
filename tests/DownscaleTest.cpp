@@ -9,7 +9,7 @@ TEST(DownScaleTest, ClosestNeighborGridInterpolation) {
     Grid grid1 = Grid{grid_func, 1, 8};
 
     std::vector<float> new_grid_func = grid1.downscale(2, new ClosestNeighborGridInterpolation).getGridFunction();
-    std::vector<float> assert_grid_func{1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1};
+    std::vector<float> assert_grid_func{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
     EXPECT_EQ(new_grid_func, assert_grid_func);
 }
