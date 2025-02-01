@@ -37,6 +37,7 @@ jobs:
 
     - name: Build project
       run: |
+        g++ --version
         cd tests/build
         cmake --build .
 
