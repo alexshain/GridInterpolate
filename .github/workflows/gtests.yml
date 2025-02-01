@@ -37,6 +37,7 @@ jobs:
 
     - name: Build project
       run: |
+        export LANG=C.UTF-8
         cd tests/build
         cmake --build .
 
