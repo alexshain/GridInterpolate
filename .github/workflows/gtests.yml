@@ -33,11 +33,11 @@ jobs:
       run: |
         mkdir -p tests/build
         cd tests/build
-        cmake ..
+        cmake .. -DCMAKE_CXX_COMPILER=g++
+
 
     - name: Build project
       run: |
-        export LANG=C.UTF-8
         cd tests/build
         cmake --build .
 
